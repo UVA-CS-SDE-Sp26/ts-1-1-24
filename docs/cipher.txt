@@ -1,0 +1,31 @@
+Cipher Documentation for TopSecret
+Rohit Gayali
+vwh2up
+2/10/26
+
+A cipher class/method will return a deciphered string from a given ciphered string
+The cipher key is stored in a file called key.txt in the ciphers folder
+The cipher file matches ciphered letters with deciphered letters
+The first line is the deciphered letter, the second line is the cipher match
+When the cipher is accessed, it must be validated
+All methods will be static
+
+public class Cipher
+    static cipherFileLocation = "../../../ciphers/key.txt"
+
+    static cipherFile = open file
+
+    public static char deciperChar(char cipheredChar)
+        cipheredCharInFile = read file, return index of cipheredChar from second line if found, else -1
+        if cipheredCharInFile > -1
+            decipheredCharInFile = read file, return char on second line using cipheredCharInFile
+            return decipheredCharInFile
+        else
+            return cipheredChar
+
+    public static String decipherText(String cipheredText)
+        String decipheredText = empty string
+        foreach (char cipheredChar in cipheredText)
+            decipheredChar = decipherChar(cipheredChar)
+            decipheredText += decipheredChar
+        return decipheredText

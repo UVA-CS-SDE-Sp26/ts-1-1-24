@@ -1,0 +1,17 @@
+Homework 2 - Top Secret
+
+// make all methods static
+
+Team Member C: You are responsible for connecting the command line to the file handler, requesting file
+contents and returning readable text. When the program is executed with no arguments, this part of the program
+should provide a list of files available, as provided from the work of Team Member B, along with a corresponding
+number. Document the plan your team makes for testing in programcontrol.txt.
+
+Accomplish:
+- returning file contents
+- reading files
+
+write two different methods to do them
+
+Tests
+- ex: whether reading in the file works properly
