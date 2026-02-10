@@ -1,0 +1,24 @@
+Top Secret
+2/4/26
+Elise Fremberg (A)
+
+This program is responsible for the command line interface used by the user to run the program.
+
+PSUEDOCODE
+if args == 0
+    display all the files
+
+else if args == 1
+    display the file at the index given by the users argument
+
+else if args == 2
+    display the file and use the key given by the user's second arg
+
+
+
+TESTS
+if zero arguments, then should list the numbered files available
+if one valid argument, then should open correct value at the index given by that argument
+if two valid arguments, then should open a correct file and use the key given by user's second arg
+
+if invalid arguments, then should reprompt the user
