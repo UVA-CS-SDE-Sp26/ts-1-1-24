@@ -2,17 +2,6 @@ Homework 2 - Top Secret
 
 // make all methods static
 
-// QUESTIONS TO ASK TA:
-    // ASK ABOUT STARTER CODE
-        // the "starter code" is the repo of the project
-    // ASK WHAT HE MEANS BY THIS: When the cipher is accessed, it must be validated. An example will be provided. Document this in cipher.txt.
-        // want the cipher to be valid (make sure that the cipher is the correct length, no spaces in between, having different things making)
-    // DESIGN TESTS DOES THAT MEAN THAT OUR TESTS HAVE TO BE IN GRADILE OR TEXTFILE
-        // plan out the tests in the test file
-        // then write some of the tests (different test file for each person)
-        // inside  each of the files write one of tests then the actual code to work
-    // WHEN IT SAYS TO DESIGN TESTS DOES THAT MEAN THE TESTS HAVE TO BE IN GRADILE IN THE DOCS FOLDER, IN THE TESTS FOLDER, OR IN THE DOCUMENTATION FOR EACH ROLE?
-
 Team Member C: You are responsible for connecting the command line to the file handler, requesting file
 contents and returning readable text. When the program is executed with no arguments, this part of the program
 should provide a list of files available, as provided from the work of Team Member B, along with a corresponding
