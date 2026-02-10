@@ -1,0 +1,9 @@
+Cipher Documentation for TopSecret
+Rohit Gayali
+vwh2up
+2/10/26
+
+A cipher class/method will return a deciphered string from a given ciphered string
+The cipher key is stored in a file called key.txt in the ciphers folder
+The cipher file matches ciphered letters with deciphered letters
+When the cipher is accessed
