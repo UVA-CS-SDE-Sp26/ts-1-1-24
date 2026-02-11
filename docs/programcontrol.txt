@@ -1,17 +1,72 @@
 Homework 2 - Top Secret
+02/10/2026
+Helen Ayalew
 
-// make all methods static
-
-Team Member C: You are responsible for connecting the command line to the file handler, requesting file
-contents and returning readable text. When the program is executed with no arguments, this part of the program
-should provide a list of files available, as provided from the work of Team Member B, along with a corresponding
-number. Document the plan your team makes for testing in programcontrol.txt.
+Objectives
+My role for Homework 2 - Top Secret is to connect the command line to the file handler. I will be requesting file contents and returning it into
+readable text for the user. I will create unit test cases to ensure that the program works properly for different situations.
 
 Accomplish:
-- returning file contents
 - reading files
+- returning file contents
 
-write two different methods to do them
+Pseudocode
+public static ArrayList<String> listFiles() {
+    // Access the list of files from Team Member B
+    files = FileHandler.readFile(fileName);
+
+    // Check if files is empty
+    if files is empty
+        print "There are no files available"
+        return available file types
+
+    // Displaying each file with its corresponding file number
+    for every i element in files
+        print (i + 1) + " " + files[i]
+}
+
+public static ArrayList<String> returnFilesContent(fileNumber, key) {
+    // Access the list of files from Team Member B
+    files = FileHandler.listFiles();
+
+    // Check if the file number for the file is valid (can't be less than 1 or greater than the file size)
+    if fileNumber < 0 or fileNumber > files.size()
+        print "The file number is invalid"
+        return fileList()
+
+    // Match the file number to it's corresponding file name from the list
+    fileName = files[fileNumber - 1]
+
+    // Asking Team Member B for the content in the file
+    content = FileHandler.readFile(fileName);
+
+    // Asking Team Member D for the cipher key
+    if the key exists
+        content = Cipher.decipher(content, key)
+    else
+        content = Cipher.decipherDefaultKey(content)
+
+    return content
+
+    // Possible errors
+    if files is empty
+        print "The file being accessed is empty"
+        fileList()
+    else
+        print "Error when accessing files"
+}
 
 Tests
-- ex: whether reading in the file works properly
+For listFiles()
+- when the file exists, it prints out the correct list (with the valid file number)
+- when the file does not exist, it prints "There are no files available" then returns the available list of files (along with the file number)
+-
+
+For returnFilesContent()
+    Valid file numbers:
+        - when the file has a valid file number and is using the default key
+        - when the file has a valid file number and is using a custom key
+    Invalid file numbers:
+        - when the file number is less than 1 (an invalid file number)
+        - when the file number is greater than the size (an invalid file number)
+        - when the file number is not a valid number (random characters, etc.)
