@@ -10,22 +10,71 @@ The first line is the deciphered letter, the second line is the cipher match
 When the cipher is accessed, it must be validated
 All methods will be static
 
+Cipher Tests
+
+check that validateCipher looks for all the right characters
+    ex.: validateCipher("abc") == false
+         validateCipher("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")  == true
+
+check that ciphered/deciphered characters are correct
+    - ex.: getDecipheredCharacters() == "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+
+for all valid characters, compare Cipher.decipherChar(testChar) to expected char
+    - ex.: Cipher.decipherChar('b') == 'a'
+
+for a few invalid characters, such as punctuation, compare Cipher.decipherChar(testChar) to the tested Char
+    - ex.: Cipher.decipherChar('.') == '.'
+
+Test small strings
+    - ex.: Cipher.decipherChar("abc ABC xyz XYZ. 1234!") == "0ab zAB wxy WXY. Z123!"
+Test the provided strings in data/carnivore.cip and data/cointelpro.cip
+    - ex.: "Dbsojwpsf, mbufs sfobnfe EDT2aaa, xbt b tztufn jnqmfnfoufe cz uif Gfefsbm Cvsfbv pg Jowftujhbujpo (GCJ) uibu xbt
+            eftjhofe up npojups fnbjm boe fmfduspojd dpnnvojdbujpot. Ju vtfe b dvtupnjAbcmf qbdlfu tojggfs uibu dpvme npojups bmm
+            pg b ubshfu vtfs't Joufsofu usbggjd. Dbsojwpsf xbt jnqmfnfoufe jo Pdupcfs 2008. Cz 3aa6 ju ibe cffo sfqmbdfe xjui
+            jnqspwfe dpnnfsdjbm tpguxbsf."
+            ==
+            "Carnivore, later renamed DCS1000, was a system implemented by the Federal Bureau of Investigation (FBI) that was
+            designed to monitor email and electronic communications. It used a customizable packet sniffer that could monitor all
+            of a target user's Internet traffic. Carnivore was implemented in October 1997. By 2005 it had been replaced with
+            improved commercial software."
+
 public class Cipher
-    static cipherFileLocation = "../../../ciphers/key.txt"
+    cipherFileLocation = "../../../ciphers/key.txt"
 
-    static cipherFile = open file
+    cipherFile = open file
 
-    public static char deciperChar(char cipheredChar)
-        cipheredCharInFile = read file, return index of cipheredChar from second line if found, else -1
+    public validateCipher(characters)
+        return characters includes incorrect characters or is wrong length (boolean)
+    
+    public getDecipheredCharacters()
+        decipheredCharacters = cipherFile.readFirstLine()
+        if !validateCipher(decipheredCharacters)
+            throw new Error("Deciphered characters is missing/has too many characters"
+        return decipheredCharacters
+
+    public getCipheredCharacters()
+        cipheredCharacters = cipherFile.readSecondLine()
+        if !validateCipher(cipheredCharacters)
+            throw new Error("Ciphered characters is missing/has too many characters"
+        return cipheredCharacters
+
+    public char deciperChar(char cipheredChar)
+        decipheredCharacters = getDecipheredCharacters()
+        cipheredCharacters = getCipheredCharacters()
+
+        cipheredCharInFile = return index of cipheredChar from cipheredCharacters if found, else -1
+
         if cipheredCharInFile > -1
-            decipheredCharInFile = read file, return char on second line using cipheredCharInFile
+            decipheredCharInFile = decipheredCharacters[cipheredCharInFile]
             return decipheredCharInFile
         else
             return cipheredChar
 
-    public static String decipherText(String cipheredText)
+    public String decipherText(String cipheredText)
         String decipheredText = empty string
+
         foreach (char cipheredChar in cipheredText)
             decipheredChar = decipherChar(cipheredChar)
             decipheredText += decipheredChar
+
         return decipheredText
