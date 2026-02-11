@@ -54,7 +54,7 @@ for a few invalid characters, such as punctuation, compare Cipher.decipherChar(t
     - ex.: Cipher.decipherChar('.') == '.'
 
 Test small strings
-    - ex.: Cipher.decipherChar("abc ABC xyz XYZ. 1234!") == "0ab zAB wxy WXY. Z123!"
+    - ex.: Cipher.decipherText("abc ABC xyz XYZ. 1234!") == "0ab zAB wxy WXY. Z123!"
 Test the provided strings in data/carnivore.cip and data/cointelpro.cip
     - ex.: "Dbsojwpsf, mbufs sfobnfe EDT2aaa, xbt b tztufn jnqmfnfoufe cz uif Gfefsbm Cvsfbv pg Jowftujhbujpo (GCJ) uibu xbt
             eftjhofe up npojups fnbjm boe fmfduspojd dpnnvojdbujpot. Ju vtfe b dvtupnjAbcmf qbdlfu tojggfs uibu dpvme npojups bmm
@@ -86,7 +86,7 @@ public class Cipher
             throw new Error("Ciphered characters is missing/has too many characters"
         return cipheredCharacters
 
-    public char deciperChar(char cipheredChar)
+    public char decipherChar(char cipheredChar)
         decipheredCharacters = getDecipheredCharacters()
         cipheredCharacters = getCipheredCharacters()
 
