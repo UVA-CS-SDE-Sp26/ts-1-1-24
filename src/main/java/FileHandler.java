@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 public class FileHandler {
     //create variable and store file path that points to "data"
-    private final Path dataFileDirectory = Paths.get("data");
+    private static final Path dataFileDirectory = Paths.get("data");
     //method returns available files in directory
-    public List<String> getAvailableFiles() throws IOException{
+    public static List<String> getAvailableFiles() throws IOException{
         //first part returns true if folder exists, second returns true if path is folder
         //otherwise throw exception
         if(!Files.exists(dataFileDirectory) || !Files.isDirectory(dataFileDirectory)){
@@ -30,7 +30,7 @@ public class FileHandler {
     }
 
     //returns file content as strings
-    public String readFile(String fileName) throws IOException{
+    public static String readFile(String fileName) throws IOException{
         //creates full path to file, openstax
         Path filePath = dataFileDirectory.resolve(fileName);
         //checks if it exists, checks if it is a regular file, otherwise exception
