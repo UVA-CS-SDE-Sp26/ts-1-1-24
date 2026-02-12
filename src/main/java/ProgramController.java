@@ -5,7 +5,7 @@ import java.util.List;
 public class ProgramController {
     public static List<String> listFiles() throws IOException {
         // Gets the available files from File Handler
-        List<String> files = fileHandler.getAvailableFiles();
+        List<String> files = FileHandler.getAvailableFiles();
         // Creating a new list to store the files once they have been ordered
         List<String> numberedFiles = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class ProgramController {
 
     public static String getContent(String filename, String key) throws IOException {
         // Gets the available files from File Handler
-        List<String> files = fileHandler.getAvailableFiles();
+        List<String> files = FileHandler.getAvailableFiles();
 
         // if the file is empty
         if (files.isEmpty()) {
@@ -43,19 +43,15 @@ public class ProgramController {
         // Storing the file name from the list
         String fileName = files.get(index - 1);
         // Getting the content within the file
-        String content = fileHandler.readFile(fileName);
+        String content = FileHandler.readFile(fileName);
 
         // Checks to see if the cipher is valid (not null)
         if (key != null) {
                 // Valid cipher + custom key
-                // content = cipher.decipherText(content, key);
                 Cipher.setCommandLineCipher(key);
-            }
-            /*else {
-                // Valid cipher + default key
-                content = cipher.decipherText(content);
-            }*/
+        }
 
+        // Gets the content deciphered text
         content = Cipher.decipherText(content);
 
         // returning the content from the file
