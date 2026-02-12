@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class UserInterface {
     public void input(String[] args) {
@@ -14,7 +15,12 @@ public class UserInterface {
 
     public void displayFiles() {
         // use listFiles method in ProgramController
-        ProgramController.listFiles(); // list the numbered files available to display
+        try {
+            ProgramController.listFiles(); // list the numbered files available to display
+        }
+        catch(IOException e) {
+            displayError(e.getMessage());
+        }
     }
 
     public void displayText(String fileNumber, String key) {
@@ -27,6 +33,9 @@ public class UserInterface {
         }
         catch(FileNotFoundException e) {
             displayError("Error: File number" + fileNumber + " is not found.");
+        }
+        catch(IOException e) {
+            displayError(e.getMessage());
         }
     }
 
