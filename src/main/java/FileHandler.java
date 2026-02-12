@@ -1,4 +1,4 @@
-//Annika Kumar, Member B, FileHandler class
+//Annika Kumar, role B, FileHandler class
 //import statements
 import java.io.IOException;
 import java.nio.file.Files;

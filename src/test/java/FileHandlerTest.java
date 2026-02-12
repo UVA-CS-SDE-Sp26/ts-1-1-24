@@ -1,4 +1,4 @@
-//Annika Kumar, Member B, FileHandlerTest class
+//Annika Kumar, role b, FileHandlerTest class
 //import statements
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
