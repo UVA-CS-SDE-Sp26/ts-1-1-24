@@ -29,7 +29,6 @@ public class FileHandler {
         }
     }
 
-
     //returns file content as strings
     public String readFile(String fileName) throws IOException{
         //creates full path to file, openstax
