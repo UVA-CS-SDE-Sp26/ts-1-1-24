@@ -19,7 +19,7 @@ public class UserInterface {
 
     public void displayText(String fileNumber, String key) {
         try {
-            // use getContent or whatever in ProgramController and print the contents
+            // use getContent in ProgramController and print the contents
             System.out.println(ProgramController.getContent(fileNumber, key));
         }
         catch(NumberFormatException e) {
