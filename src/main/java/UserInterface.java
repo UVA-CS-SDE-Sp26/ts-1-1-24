@@ -16,7 +16,7 @@ public class UserInterface {
     public void displayFiles() {
         // use listFiles method in ProgramController
         try {
-            ProgramController.listFiles(); // list the numbered files available to display
+            System.out.println(ProgramController.listFiles().toString()); // list the numbered files available to display
         }
         catch(IOException e) {
             displayError(e.getMessage());
