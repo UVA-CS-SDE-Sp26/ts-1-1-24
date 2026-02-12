@@ -3,15 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramController {
-    private FileHandler fileHandler;
-    // private Cipher cipher;
-
-    public ProgramController(FileHandler fileHandler, Cipher cipher) {
-        this.fileHandler = fileHandler;
-        //this.cipher = cipher;
-    }
-
-    public List<String> listFiles() throws IOException {
+    public static List<String> listFiles() throws IOException {
         // Gets the available files from File Handler
         List<String> files = fileHandler.getAvailableFiles();
         // Creating a new list to store the files once they have been ordered
@@ -30,7 +22,7 @@ public class ProgramController {
         return numberedFiles;
     }
 
-    public String getContent(String filename, String key) throws IOException {
+    public static String getContent(String filename, String key) throws IOException {
         // Gets the available files from File Handler
         List<String> files = fileHandler.getAvailableFiles();
 
