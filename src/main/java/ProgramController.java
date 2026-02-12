@@ -1,11 +1,72 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramController {
-    // Team member C:
-        // create the two methods that everyone else is going to be using
-    public static ArrayList<String> listFiles(){
-        ArrayList<String> files = new ArrayList<>();
-        files.add("C:\\Users\\"+System.getProperty("user.name"));
-        return files;
+    private FileHandler fileHandler;
+    // private Cipher cipher;
+
+    public ProgramController(FileHandler fileHandler, Cipher cipher) {
+        this.fileHandler = fileHandler;
+        //this.cipher = cipher;
+    }
+
+    public List<String> listFiles() throws IOException {
+        // Gets the available files from File Handler
+        List<String> files = fileHandler.getAvailableFiles();
+        // Creating a new list to store the files once they have been ordered
+        List<String> numberedFiles = new ArrayList<>();
+
+        for (int i = 0; i < files.size(); i++) {
+            // Creates the correct file numbers
+            String number = String.format("%02d", i + 1);
+            // Displays the file number with its corresponding file
+            String entry = number + " " + files.get(i);
+            // Adds each entry (file number + corresponding file) to the new list
+            numberedFiles.add(entry);
+        }
+
+        // returns the files with their corresponding file number
+        return numberedFiles;
+    }
+
+    public String getContent(String filename, String key) throws IOException {
+        // Gets the available files from File Handler
+        List<String> files = fileHandler.getAvailableFiles();
+
+        // if the file is empty
+        if (files.isEmpty()) {
+            throw new IllegalStateException("The file does not exist");
+            // return empty Array
+        }
+
+        // Converts the file number from a string into an int
+        int index = Integer.parseInt(filename);
+
+        // Checks if the index is less than 1 or greater than the size of the file
+        if (index < 1 || index > files.size()) {
+            throw new IllegalStateException("The file number is invalid");
+        }
+
+        // Storing the file name from the list
+        String fileName = files.get(index - 1);
+        // Getting the content within the file
+        String content = fileHandler.readFile(fileName);
+
+        // Checks to see if the cipher is valid (not null)
+        if (key != null) {
+                // Valid cipher + custom key
+                // content = cipher.decipherText(content, key);
+                Cipher.setCommandLineCipher(key);
+            }
+            /*else {
+                // Valid cipher + default key
+                content = cipher.decipherText(content);
+            }*/
+
+        content = Cipher.decipherText(content);
+
+        // returning the content from the file
+        return content;
     }
 }
