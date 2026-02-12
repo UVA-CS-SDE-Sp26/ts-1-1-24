@@ -1,0 +1,27 @@
+Top Secret - HW 2
+2/12/26
+Elliot Park, esy5kb
+
+The command line interface is what is used by the user to run the program.
+It takes user arguments of a file selection and a key selection. With no key selection,
+there is a default key that is used. UserInterface primarily uses the methods made in
+ProgramController (Helen/Role C).
+
+Tests:
+1. Test that providing 0 arguments works properly.
+2. Test that providing a valid file number works properly (no key).
+3. Test that providing an invalid file number is handled properly.
+4. Test that providing a valid file and key is sent to program control properly.
+5. Test that invalid arguments are handled properly.
+
+User Interface Options:
+The program is run from the class TopSecret using the command java topsecret.
+Running java topsecret will list the numbered files available to display.
+
+There is the option to run java topsecret with an argument that is a two digit
+integer corresponding to a file. This will display the contents of that file.
+
+There is the option to run java topsecret with an argument in addition to the
+previous number. It is the choice of a custom alternate key to decipher a file.
+In the absence of this second argument, the default key is used.
+Ex: java top secret __ ______...

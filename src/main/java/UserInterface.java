@@ -1,0 +1,36 @@
+import java.io.FileNotFoundException;
+
+public class UserInterface {
+    public void input(String[] args) {
+        if(args.length == 0)
+             displayFiles();
+        else if(args.length == 1)
+            displayText(args[0], null); // display file with default key
+        else if(args.length == 2)
+            displayText(args[0], args[1]); // display file with given key
+        else
+            displayError("Error: Too many arguments. Use 2 arguments at most.");
+    }
+
+    public void displayFiles() {
+        // use listFiles method in ProgramController
+        ProgramController.listFiles(); // list the numbered files available to display
+    }
+
+    public void displayText(String fileNumber, String key) {
+        try {
+            // use getContent or whatever in ProgramController and print the contents
+            System.out.println(ProgramController.getContent(fileNumber, key));
+        }
+        catch(NumberFormatException e) {
+            displayError("Error: File number must be a 2 digit integer.");
+        }
+        catch(FileNotFoundException e) {
+            displayError("Error: File number" + fileNumber + " is not found.");
+        }
+    }
+
+    public void displayError(String message) {
+        System.out.println(message);
+    }
+}
