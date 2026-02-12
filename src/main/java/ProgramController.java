@@ -1,3 +1,5 @@
+// Helen Ayalew (qer4de)
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,24 +26,7 @@ public class ProgramController {
 
     public static String getContent(String filename, String key) throws IOException {
         // Gets the available files from File Handler
-        List<String> files = FileHandler.getAvailableFiles();
-
-        // if the file is empty
-        if (files.isEmpty()) {
-            throw new IllegalStateException("The file does not exist");
-            // return empty Array
-        }
-
-        // Converts the file number from a string into an int
-        int index = Integer.parseInt(filename);
-
-        // Checks if the index is less than 1 or greater than the size of the file
-        if (index < 1 || index > files.size()) {
-            throw new IllegalStateException("The file number is invalid");
-        }
-
-        // Storing the file name from the list
-        String fileName = files.get(index - 1);
+        String fileName = getString(filename);
         // Getting the content within the file
         String content = FileHandler.readFile(fileName);
 
@@ -56,5 +41,27 @@ public class ProgramController {
 
         // returning the content from the file
         return content;
+    }
+
+    private static String getString(String filename) throws IOException {
+        // Getting the files from file handler
+        List<String> files = FileHandler.getAvailableFiles();
+
+        // if the file is empty
+        if (files.isEmpty()) {
+            throw new IllegalStateException("The file does not exist");
+        }
+
+        // Converts the file number from a string into an int
+        int index = Integer.parseInt(filename);
+
+        // Checks if the index is less than 1 or greater than the size of the file
+        if (index < 1 || index > files.size()) {
+            throw new IllegalStateException("The file number is invalid");
+        }
+
+        // Storing the file name from the list
+        String fileName = files.get(index - 1);
+        return fileName;
     }
 }
