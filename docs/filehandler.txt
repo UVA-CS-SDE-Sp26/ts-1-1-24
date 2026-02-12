@@ -1,1 +1,37 @@
+Top Secret
+2/10/2026
+Annika Kumar (Team Member B)
+
+This part of the program is responsible for managing file access for the TopSecret Assignment.
+It will read in data files from a folder named data. When a request is made for a file in the
+directory, the program will return the file content.
+
+Pseudocode
+Method getAvailableFiles
+    Open the "data" folder in directory
+
+    If directory does not exist
+        Throw an error
+
+    Get items inside directory
+    Filter to include only regular files (use stream process from lecture)
+    Convert each file to its filename
+    Sort filenames in alphabetical order
+    Return filenames
+
+Function readFile(filename)
+    Create the file path by combining "data" directory and filename
+
+    If file does not exist
+        Throw an error
+
+    Read entire file as text
+    Return file contents as a string
+
+
+Tests
+1. list available files and return them
+2. read a file and return its content
+3. check for missing files
+4. check if directory exists
 
