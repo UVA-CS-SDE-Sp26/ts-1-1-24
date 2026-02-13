@@ -57,44 +57,17 @@ public class ProgramControllerTest {
             }
         }
     }
-/*
-    @Test
-    // Checks for correct file number with custom key
-    void validFileNumberAndCustomKey() throws IOException {
-        try (MockedStatic<FileHandler> mockedStatic = Mockito.mockStatic(FileHandler.class)) {
-            try (MockedStatic<Cipher> mockedStaticCipher = Mockito.mockStatic(Cipher.class)) {
-                // Gets the available files
-                when(FileHandler.getAvailableFiles()).thenReturn(List.of("file01.txt"));
-                // Reads the contents within the file to get the cipher
-                when(FileHandler.readFile("file01.txt")).thenReturn("abc");
-                // Takes the ciphered text and deciphers them
-                when(Cipher.decipherText("abc")).thenReturn("def");
-
-                // Checks if the result is equal to the deciphered text
-                String result = ProgramController.getContent("01", "CUSTOMKEY");
-                mockedStaticCipher.when(() -> Cipher.setCommandLineCipher("CUSTOMKEY")).thenAnswer(inv -> null);
-                assertEquals("def", result);
-            }
-        }
-    }
- */
 
     @Test
     void validFileNumberAndCustomKey() throws IOException {
         try (MockedStatic<FileHandler> mockedFile = Mockito.mockStatic(FileHandler.class);
              MockedStatic<Cipher> mockedCipher = Mockito.mockStatic(Cipher.class)) {
-
-            mockedFile.when(() -> FileHandler.getAvailableFiles()).thenReturn(List.of("file01.cip"));
-
-            mockedFile.when(() -> FileHandler.readFile("file01.cip")).thenReturn("abc");
-
-            mockedCipher.when(() -> Cipher.setCommandLineCipher("CUSTOMKEY")).thenAnswer(invocation -> null);
-
-            mockedCipher.when(() -> Cipher.decipherText("abc")).thenReturn("def");
-
-            String result = ProgramController.getContent("01", "CUSTOMKEY");
-
-            assertEquals("def", result);
+                mockedFile.when(() -> FileHandler.getAvailableFiles()).thenReturn(List.of("file01.cip"));
+                mockedFile.when(() -> FileHandler.readFile("file01.cip")).thenReturn("abc");
+                mockedCipher.when(() -> Cipher.setCommandLineCipher("CUSTOMKEY")).thenAnswer(invocation -> null);
+                mockedCipher.when(() -> Cipher.decipherText("abc")).thenReturn("def");
+                String result = ProgramController.getContent("01", "CUSTOMKEY");
+                assertEquals("def", result);
         }
     }
 
