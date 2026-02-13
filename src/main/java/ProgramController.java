@@ -34,17 +34,6 @@ public class ProgramController {
             content = Cipher.decipherText(content);
         }
 
-        /*
-        // Checks to see if the cipher is valid (not null)
-        if (key != null) {
-                // Valid cipher + custom key
-                Cipher.setCommandLineCipher(key);
-        }
-
-        // Gets the content deciphered text
-        content = Cipher.decipherText(content);
-         */
-
         // returning the content from the file
         return content;
     }
