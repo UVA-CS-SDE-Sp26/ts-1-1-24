@@ -62,11 +62,17 @@ public class ProgramControllerTest {
     void validFileNumberAndCustomKey() throws IOException {
         try (MockedStatic<FileHandler> mockedFile = Mockito.mockStatic(FileHandler.class);
              MockedStatic<Cipher> mockedCipher = Mockito.mockStatic(Cipher.class)) {
+                // Checks if the file returns correctly from file handler
                 mockedFile.when(() -> FileHandler.getAvailableFiles()).thenReturn(List.of("file01.cip"));
+                // Checks the return type/the key works with the file
                 mockedFile.when(() -> FileHandler.readFile("file01.cip")).thenReturn("abc");
+                // Checks if there is a custom key
                 mockedCipher.when(() -> Cipher.setCommandLineCipher("CUSTOMKEY")).thenAnswer(invocation -> null);
+                // Checks to see if it will decipher correctly
                 mockedCipher.when(() -> Cipher.decipherText("abc")).thenReturn("def");
+                // Stores the result that matches the key
                 String result = ProgramController.getContent("01", "CUSTOMKEY");
+                // Checks if the result matches the result
                 assertEquals("def", result);
         }
     }
@@ -76,8 +82,11 @@ public class ProgramControllerTest {
     void testGetStringValid() throws IOException {
         // Checking whether the file number is valid using the getString method
         try (var mocked = mockStatic(FileHandler.class)) {
+            // Gets the files from File Handler and then lists them
             mocked.when(FileHandler::getAvailableFiles).thenReturn(List.of("file01.txt"));
+            // Checks the string of the file with my method
             String name = ProgramController.getString("1");
+            // Checks to see if the file has the same name
             assertEquals("file01.txt", name);
         }
     }
