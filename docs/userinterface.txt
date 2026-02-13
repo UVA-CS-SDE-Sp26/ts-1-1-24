@@ -10,8 +10,8 @@ ProgramController (Helen/Role C).
 Tests:
 1. Test that providing 0 arguments works properly.
 2. Test that providing a valid file number works properly (no key).
-3. Test that providing an invalid file number is handled properly.
-4. Test that providing a valid file and key is sent to program control properly.
+3. Test that providing a valid file and key is sent to program control properly.
+4. Test that too many arguments are handled properly.
 5. Test that invalid arguments are handled properly.
 
 User Interface Options:

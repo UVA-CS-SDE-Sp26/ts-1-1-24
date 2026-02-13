@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class UserInterface {
+
     public void input(String[] args) {
         if(args.length == 0)
              displayFiles();
