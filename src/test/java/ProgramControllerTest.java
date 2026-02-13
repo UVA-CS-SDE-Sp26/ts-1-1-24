@@ -77,6 +77,16 @@ public class ProgramControllerTest {
     }
 
     @Test
+    void testGetStringValid() throws IOException {
+        // Checking whether the file number is valid using the getString method
+        try (var mocked = mockStatic(FileHandler.class)) {
+            mocked.when(FileHandler::getAvailableFiles).thenReturn(List.of("file01.txt"));
+            String name = ProgramController.getString("1");
+            assertEquals("file01.txt", name);
+        }
+    }
+
+    @Test
     // Checks for file numbers less than one
     public void invalidFileNumberLessThanOne() throws IOException {
         try (MockedStatic<FileHandler> mockedStatic = Mockito.mockStatic(FileHandler.class)) {

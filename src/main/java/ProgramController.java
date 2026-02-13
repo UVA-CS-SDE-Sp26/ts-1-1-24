@@ -43,7 +43,7 @@ public class ProgramController {
         return content;
     }
 
-    private static String getString(String filename) throws IOException {
+    static String getString(String filename) throws IOException {
         // Getting the files from file handler
         List<String> files = FileHandler.getAvailableFiles();
 
@@ -53,7 +53,13 @@ public class ProgramController {
         }
 
         // Converts the file number from a string into an int
-        int index = Integer.parseInt(filename);
+        int index;
+
+        try {
+            index = Integer.parseInt(filename);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("File number must be a number", e);
+        }
 
         // Checks if the index is less than 1 or greater than the size of the file
         if (index < 1 || index > files.size()) {
