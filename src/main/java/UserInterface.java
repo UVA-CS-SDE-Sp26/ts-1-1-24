@@ -17,7 +17,11 @@ public class UserInterface {
     public void displayFiles() {
         // use listFiles method in ProgramController
         try {
-            System.out.println(ProgramController.listFiles().toString()); // list the numbered files available to display
+            for(String file : ProgramController.listFiles()) {
+                System.out.println(file);
+            }
+
+            //System.out.println(ProgramController.listFiles().toString()); // list the numbered files available to display
         }
         catch(IOException e) {
             displayError(e.getMessage());
@@ -29,7 +33,7 @@ public class UserInterface {
             // use getContent in ProgramController and print the contents
             System.out.println(ProgramController.getContent(fileNumber, key));
         }
-        catch(NumberFormatException e) {
+        catch(IllegalArgumentException e) {
             displayError("Error: File number must be a 2 digit integer.");
         }
         catch(FileNotFoundException e) {
