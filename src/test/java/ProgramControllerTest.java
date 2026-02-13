@@ -120,8 +120,6 @@ public class ProgramControllerTest {
         }
     }
 
-
-
     @Test
     // Checks for file numbers greater than size
     public void invalidFileNumberGreaterThanSize() throws IOException {
