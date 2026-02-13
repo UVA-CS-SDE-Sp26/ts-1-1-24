@@ -30,10 +30,9 @@ public class ProgramController {
         // Getting the content within the file
         String content = FileHandler.readFile(fileName);
 
-        content = Cipher.decipherText(content);
-
-        throw new IllegalStateException("There is nothing to decipher");
-
+        if (filename.split("\\.")[1] == "cip") {
+            content = Cipher.decipherText(content);
+        }
 
         /*
         // Checks to see if the cipher is valid (not null)
