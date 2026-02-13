@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -44,9 +45,9 @@ public class ProgramControllerTest {
         try (MockedStatic<FileHandler> mockedStatic = Mockito.mockStatic(FileHandler.class)) {
             try (MockedStatic<Cipher> mockedStaticCipher = Mockito.mockStatic(Cipher.class)) {
                 // Gets the available files
-                when(FileHandler.getAvailableFiles()).thenReturn(List.of("file01.txt"));
+                when(FileHandler.getAvailableFiles()).thenReturn(List.of("file01.cip"));
                 // Reads the contents within the file to get the cipher
-                when(FileHandler.readFile("file01.txt")).thenReturn("abc");
+                when(FileHandler.readFile("file01.cip")).thenReturn("abc");
                 // Takes the ciphered text and deciphers them
                 when(Cipher.decipherText("abc")).thenReturn("def");
 
@@ -56,7 +57,7 @@ public class ProgramControllerTest {
             }
         }
     }
-
+/*
     @Test
     // Checks for correct file number with custom key
     void validFileNumberAndCustomKey() throws IOException {
@@ -70,11 +71,33 @@ public class ProgramControllerTest {
                 when(Cipher.decipherText("abc")).thenReturn("def");
 
                 // Checks if the result is equal to the deciphered text
-                String result = ProgramController.getContent("01", null);
+                String result = ProgramController.getContent("01", "CUSTOMKEY");
+                mockedStaticCipher.when(() -> Cipher.setCommandLineCipher("CUSTOMKEY")).thenAnswer(inv -> null);
                 assertEquals("def", result);
             }
         }
     }
+ */
+
+    @Test
+    void validFileNumberAndCustomKey() throws IOException {
+        try (MockedStatic<FileHandler> mockedFile = Mockito.mockStatic(FileHandler.class);
+             MockedStatic<Cipher> mockedCipher = Mockito.mockStatic(Cipher.class)) {
+
+            mockedFile.when(() -> FileHandler.getAvailableFiles()).thenReturn(List.of("file01.cip"));
+
+            mockedFile.when(() -> FileHandler.readFile("file01.cip")).thenReturn("abc");
+
+            mockedCipher.when(() -> Cipher.setCommandLineCipher("CUSTOMKEY")).thenAnswer(invocation -> null);
+
+            mockedCipher.when(() -> Cipher.decipherText("abc")).thenReturn("def");
+
+            String result = ProgramController.getContent("01", "CUSTOMKEY");
+
+            assertEquals("def", result);
+        }
+    }
+
 
     @Test
     void testGetStringValid() throws IOException {
@@ -86,6 +109,7 @@ public class ProgramControllerTest {
         }
     }
 
+    /*
     @Test
     // Checks for file numbers less than one
     public void invalidFileNumberLessThanOne() throws IOException {
@@ -96,6 +120,17 @@ public class ProgramControllerTest {
             assertThrows(IllegalStateException.class, () -> ProgramController.getContent("0", null));
         }
     }
+    */
+
+    @Test
+    public void invalidFileNumberLessThanOne() throws Exception {
+        try (MockedStatic<FileHandler> mockedFile = Mockito.mockStatic(FileHandler.class)) {
+            mockedFile.when(() -> FileHandler.getAvailableFiles()).thenReturn(List.of("file01.txt"));
+            assertThrows(FileNotFoundException.class,() -> ProgramController.getContent("0", null));
+        }
+    }
+
+
 
     @Test
     // Checks for file numbers greater than size
