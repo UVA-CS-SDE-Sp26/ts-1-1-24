@@ -109,23 +109,13 @@ public class ProgramControllerTest {
         }
     }
 
-    /*
-    @Test
-    // Checks for file numbers less than one
-    public void invalidFileNumberLessThanOne() throws IOException {
-        try (MockedStatic<FileHandler> mockedStatic = Mockito.mockStatic(FileHandler.class)) {
-            // Checks that the available files (such as file01.txt)
-            when(FileHandler.getAvailableFiles()).thenReturn(List.of("file01.txt"));
-            // Checks if the file number is less than 0 and the key is null
-            assertThrows(IllegalStateException.class, () -> ProgramController.getContent("0", null));
-        }
-    }
-    */
 
     @Test
     public void invalidFileNumberLessThanOne() throws Exception {
         try (MockedStatic<FileHandler> mockedFile = Mockito.mockStatic(FileHandler.class)) {
+            // Checks that the available files (such as file01.txt)
             mockedFile.when(() -> FileHandler.getAvailableFiles()).thenReturn(List.of("file01.txt"));
+            // Checks if the file number is less than 0 and the key is null
             assertThrows(FileNotFoundException.class,() -> ProgramController.getContent("0", null));
         }
     }
