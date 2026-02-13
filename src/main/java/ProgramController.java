@@ -30,7 +30,9 @@ public class ProgramController {
         // Getting the content within the file
         String content = FileHandler.readFile(fileName);
 
+        // Checks for the file name
         if (filename.split("\\.")[1] == "cip") {
+            // Deciphers the text
             content = Cipher.decipherText(content);
         }
 
