@@ -30,6 +30,14 @@ public class ProgramController {
         // Getting the content within the file
         String content = FileHandler.readFile(fileName);
 
+        if (filename.contains(".cip")) {
+            content = Cipher.decipherText(content);
+        }
+        else if (filename.contains(".txt")) {
+            throw new IllegalStateException("There is nothing to decipher");
+        }
+
+        /*
         // Checks to see if the cipher is valid (not null)
         if (key != null) {
                 // Valid cipher + custom key
@@ -38,6 +46,7 @@ public class ProgramController {
 
         // Gets the content deciphered text
         content = Cipher.decipherText(content);
+         */
 
         // returning the content from the file
         return content;
