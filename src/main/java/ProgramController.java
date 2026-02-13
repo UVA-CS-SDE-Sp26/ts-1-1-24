@@ -39,32 +39,6 @@ public class ProgramController {
         }
 
         return content;
-
-        /*
-        if (fileName.split("\\.")[1] == "cip") {
-            content = Cipher.decipherText(content);
-        }
-
-        // Checks for the file name
-        if (filename.split("\\.")[1].equals("cip")) {
-            // Deciphers the text
-            content = Cipher.decipherText(content);
-        }
-
-
-        // Checks to see if the cipher is valid (not null)
-        if (key != null) {
-                // Valid cipher + custom key
-                Cipher.setCommandLineCipher(key);
-        }
-
-        // Gets the content deciphered text
-        content = Cipher.decipherText(content);
-
-
-        // returning the content from the file
-        return content;
-         */
     }
 
     static String getString(String filename) throws IOException {
