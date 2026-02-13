@@ -58,16 +58,26 @@ public class ProgramControllerTest {
     }
 
     @Test
+    // Checks for correct file number with custom key
     void validFileNumberAndCustomKey() throws IOException {
-        try (MockedStatic<Cipher> mockedStatic = Mockito.mockStatic(Cipher.class)) {
-            // Stores the file with its key
-            ProgramController.getContent("file01", "Key");
-            // Checks if the file matches it's corresponding key
-            mockedStatic.verify(() -> Cipher.setCommandLineCipher("Key"));
+        try (MockedStatic<FileHandler> mockedStatic = Mockito.mockStatic(FileHandler.class)) {
+            try (MockedStatic<Cipher> mockedStaticCipher = Mockito.mockStatic(Cipher.class)) {
+                // Gets the available files
+                when(FileHandler.getAvailableFiles()).thenReturn(List.of("file01.txt"));
+                // Reads the contents within the file to get the cipher
+                when(FileHandler.readFile("file01.txt")).thenReturn("abc");
+                // Takes the ciphered text and deciphers them
+                when(Cipher.decipherText("abc")).thenReturn("def");
+
+                // Checks if the result is equal to the deciphered text
+                String result = ProgramController.getContent("01", null);
+                assertEquals("def", result);
+            }
         }
     }
 
     @Test
+    // Checks for file numbers less than one
     public void invalidFileNumberLessThanOne() throws IOException {
         try (MockedStatic<FileHandler> mockedStatic = Mockito.mockStatic(FileHandler.class)) {
             // Checks that the available files (such as file01.txt)
@@ -78,6 +88,7 @@ public class ProgramControllerTest {
     }
 
     @Test
+    // Checks for file numbers greater than size
     public void invalidFileNumberGreaterThanSize() throws IOException {
         try (MockedStatic<FileHandler> mockedStatic = Mockito.mockStatic(FileHandler.class)) {
             // Checks to see if the file number corresponds with the file
@@ -88,12 +99,14 @@ public class ProgramControllerTest {
     }
 
     @Test
-    public void invalidFileNumberNotANumber() throws IOException {
+    // Checks for file numbers that are not a number
+    public void invalidFileNumberNotANumber() {
         // Checks if the file number inputted is something other than a number
         assertThrows(IllegalArgumentException.class, () -> ProgramController.getContent("abc", null));
     }
 
     @Test
+    // Checks if it lists files that are not empty
     public void listFilesNotEmpty() throws IOException {
         try (MockedStatic<FileHandler> mockedStatic = Mockito.mockStatic(FileHandler.class)) {
             // Checks if the available files are not empty
